@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { LanguageSelector } from "@/components/language-selector"
 
 export function StickyHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -80,14 +81,17 @@ export function StickyHeader() {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <Button
-            onClick={() => scrollToSection("services")}
-            className={`rounded-full px-6 transition-all ${
-              isScrolled ? "bg-[#00998F] hover:bg-[#00887F] text-white" : "bg-white text-[#00998F] hover:bg-white/90"
-            }`}
-          >
-            {t("nav.bookNow")}
-          </Button>
+          <div className="flex items-center gap-2">
+            <LanguageSelector />
+            <Button
+              onClick={() => scrollToSection("services")}
+              className={`rounded-full px-6 transition-all ${
+                isScrolled ? "bg-[#00998F] hover:bg-[#00887F] text-white" : "bg-white text-[#00998F] hover:bg-white/90"
+              }`}
+            >
+              {t("nav.bookNow")}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -123,6 +127,22 @@ export function StickyHeader() {
               >
                 {t("nav.why5cn")}
               </button>
+              <div className="pt-4 mt-4 border-t">
+                <div className="text-sm font-medium text-gray-500 mb-3">Language</div>
+                <div className="flex flex-col gap-2">
+                  <button className="flex items-center gap-2 py-2 px-3 text-sm bg-gray-100 rounded-md">
+                    <span>🇬🇧</span>
+                    English
+                  </button>
+                  <a
+                    href="https://ae.5cn.site/"
+                    className="flex items-center gap-2 py-2 px-3 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+                  >
+                    <span>🇸🇦</span>
+                    العربية
+                  </a>
+                </div>
+              </div>
               <Button
                 onClick={() => scrollToSection("services")}
                 className="bg-[#00998F] hover:bg-[#00887F] text-white rounded-full mt-4"

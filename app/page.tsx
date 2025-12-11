@@ -17,6 +17,7 @@ import { useLanguage } from "@/lib/language-context"
 import IVDripsSlider from "@/components/iv-drips-slider"
 import { ivDripsData } from "@/lib/iv-drips-data"
 import { useState } from "react"
+import { LanguageSelector } from "@/components/language-selector"
 
 export default function HomePage() {
   const { language, t } = useLanguage()
@@ -336,6 +337,8 @@ export default function HomePage() {
             </a>
           </div>
           <div className="flex items-center gap-2">
+            <LanguageSelector />
+
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon">
@@ -426,6 +429,23 @@ export default function HomePage() {
 
                   {/* Mobile Menu Footer with CTA */}
                   <div className="p-6 border-t mt-auto">
+                    <div className="mb-4 pb-4 border-b">
+                      <div className="text-sm font-medium text-muted-foreground mb-2">Language</div>
+                      <div className="flex flex-col gap-2">
+                        <button className="flex items-center gap-2 py-2 px-3 text-sm text-foreground bg-accent rounded-md">
+                          <span>🇬🇧</span>
+                          English
+                        </button>
+                        <a
+                          href="https://ae.5cn.site/"
+                          className="flex items-center gap-2 py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                        >
+                          <span>🇸🇦</span>
+                          العربية
+                        </a>
+                      </div>
+                    </div>
+
                     <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90" asChild>
                       <a href="https://wa.me/966115127600" target="_blank" rel="noopener noreferrer">
                         {t("nav.bookNow")}
