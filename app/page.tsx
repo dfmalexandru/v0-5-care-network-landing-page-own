@@ -10,12 +10,19 @@ import TreatmentSlider from "@/components/treatment-slider"
 import ReviewsSlider from "@/components/reviews-slider"
 import PartnersSlider from "@/components/partners-slider"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { ChevronDown, Menu } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import IVDripsSlider from "@/components/iv-drips-slider"
+import { ivDripsData } from "@/lib/iv-drips-data"
+import { useState } from "react"
 
 export default function HomePage() {
   const { language, t } = useLanguage()
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [ivDripsOpen, setIvDripsOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const allServices = [
     {
@@ -106,21 +113,6 @@ export default function HomePage() {
       reverse: true,
     },
     {
-      name: "Dental Clinic",
-      tagline: "Complete dental care",
-      description: "Checkups, cleanings, treatments, and cosmetic work. Experienced dentists with modern equipment.",
-      benefits: [
-        "Experienced dental professionals",
-        "Modern equipment",
-        "Comprehensive treatments",
-        "Flexible appointments",
-      ],
-      price: "Starting from 300",
-      duration: "30-60 min",
-      image: "/saudi-dentist-dental-clinic-checkup-patient.jpg",
-      reverse: false,
-    },
-    {
       name: "Office Medical Care",
       tagline: "Keep your team healthy",
       description: "On-site medical services for businesses. Staff clinics, health screenings, and wellness programs.",
@@ -128,7 +120,7 @@ export default function HomePage() {
       price: "Custom packages",
       duration: "Varies",
       image: "/saudi-medical-team-office-corporate-health-screening.jpg",
-      reverse: true,
+      reverse: false,
     },
     {
       name: "Home Radiology",
@@ -138,7 +130,7 @@ export default function HomePage() {
       price: "Starting from 400",
       duration: "30-45 min",
       image: "/saudi-radiologist-portable-xray-home-imaging.jpg",
-      reverse: false,
+      reverse: true,
     },
     {
       name: "Home Nursing Care",
@@ -153,201 +145,51 @@ export default function HomePage() {
       price: "Starting from 600",
       duration: "Custom schedules",
       image: "/saudi-nurse-home-nursing-care-patient-monitoring.jpg",
-      reverse: true,
+      reverse: false,
     },
   ]
 
-  const ivDrips = [
-    {
-      name: "Weight Loss IV",
-      tagline: "Boost metabolism",
-      description: "Amino acids and B-vitamins to increase fat burning and support healthy weight loss.",
-      benefits: ["Accelerates metabolism", "Increases fat burning", "Reduces appetite", "Boosts energy levels"],
-      price: "1320",
-      priceOriginal: "1550",
-      priceDiscounted: "1320",
-      duration: "60-75 min",
-      image: "/images/task-01k9sz3349em9rkcctgsfb9ytp-1762881885-img-1.webp",
-    },
-    {
-      name: "Energy Boost IV",
-      tagline: "Beat fatigue fast",
-      description: "B-vitamins and amino acids to restore energy. Perfect for busy schedules.",
-      benefits: [
-        "Increases energy & focus",
-        "Reduces chronic fatigue",
-        "Enhances mental clarity",
-        "Supports metabolism",
-      ],
-      price: "1320",
-      priceOriginal: "1550",
-      priceDiscounted: "1320",
-      duration: "30-45 min",
-      image: "/images/energy-renewal-medical-consultation.webp",
-    },
-    {
-      name: "Skin Freshness IV",
-      tagline: "Glow from within",
-      description:
-        "Antioxidants and vitamins for radiant skin. Glutathione, Vitamin C, and biotin for visible results.",
-      benefits: [
-        "Skin brightening & anti-aging",
-        "Collagen production boost",
-        "Reduces pigmentation",
-        "Improves skin texture",
-      ],
-      price: "1400",
-      priceOriginal: "1650",
-      priceDiscounted: "1400",
-      duration: "45-60 min",
-      image: "/images/woman-in-black-hijab-glow-radiance.webp",
-    },
-    {
-      name: "Bariatric Surgery IV",
-      tagline: "Post-surgery recovery",
-      description: "Essential vitamins and minerals for optimal recovery after bariatric surgery.",
-      benefits: ["Supports healing", "Prevents deficiencies", "Boosts energy", "Aids absorption"],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "45-60 min",
-      image: "/images/medical-care-recovery-health-professional-treatmen.jpg",
-    },
-    {
-      name: "Chronic Fatigue IV",
-      tagline: "Restore vitality",
-      description: "Targeted nutrients to combat chronic fatigue and restore daily energy.",
-      benefits: ["Reduces fatigue", "Increases stamina", "Improves mood", "Enhances recovery"],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "45-60 min",
-      image: "/images/person-recovering-resting-peaceful-wellness-comfor.jpg",
-    },
-    {
-      name: "Diet & Detox IV",
-      tagline: "Feel renewed",
-      description: "Liver support and antioxidants to eliminate toxins and support weight loss naturally.",
-      benefits: ["Supports liver function", "Eliminates toxins", "Improves digestion", "Boosts metabolism"],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "60-75 min",
-      image: "/images/clean-fresh-green-detox-wellness-organic.jpg",
-    },
-    {
-      name: "Hair Growth IV",
-      tagline: "Stronger, healthier hair",
-      description: "Biotin, vitamins, and minerals to promote hair growth and reduce hair loss.",
-      benefits: ["Promotes hair growth", "Reduces hair loss", "Strengthens follicles", "Improves scalp health"],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "45-60 min",
-      image: "/images/woman-in-black-hijab-glow-radiance.webp",
-    },
-    {
-      name: "Depression IV",
-      tagline: "Lift your mood",
-      description: "Vitamins and amino acids to support mental health and emotional well-being.",
-      benefits: ["Improves mood", "Reduces anxiety", "Supports brain health", "Enhances emotional balance"],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "45-60 min",
-      image: "/images/videoframe-5093.png",
-    },
-    {
-      name: "Motherhood IV",
-      tagline: "Support for moms",
-      description: "Essential nutrients for pregnancy, postpartum recovery, and breastfeeding mothers.",
-      benefits: ["Supports pregnancy health", "Aids postpartum recovery", "Boosts energy", "Enhances milk production"],
-      price: "1400",
-      priceOriginal: "1650",
-      priceDiscounted: "1400",
-      duration: "45-60 min",
-      image: "/images/woman-in-black-hijab-iv-treatment.webp",
-    },
-    {
-      name: "Immune IV",
-      tagline: "Boost your defenses",
-      description: "High-dose Vitamin C and Zinc to fight illness and speed recovery.",
-      benefits: [
-        "Boosts immune function",
-        "Fights infections faster",
-        "Reduces illness duration",
-        "Supports respiratory health",
-      ],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "45-60 min",
-      image: "/images/healthy-person-wellness-protection-immunity-nature.jpg",
-    },
-    {
-      name: "Anti-Aging IV",
-      tagline: "Turn back the clock",
-      description: "NAD+ and antioxidants to slow aging and boost cellular energy.",
-      benefits: ["Slows cellular aging", "Boosts cellular energy", "Enhances DNA repair", "Improves overall vitality"],
-      price: "1060",
-      priceOriginal: "1250",
-      priceDiscounted: "1060",
-      duration: "90-120 min",
-      image: "/images/medical-consultation-scene.webp",
-    },
-    {
-      name: "Anti-Stress IV",
-      tagline: "Calm mind and body",
-      description: "Magnesium and B-vitamins to reduce stress and improve sleep.",
-      benefits: [
-        "Reduces stress & anxiety",
-        "Improves mood & relaxation",
-        "Supports better sleep",
-        "Balances cortisol levels",
-      ],
-      price: "1060",
-      priceOriginal: "1250",
-      priceDiscounted: "1060",
-      duration: "45-60 min",
-      image: "/images/videoframe-5093.png",
-    },
-    {
-      name: "Cold & Flu IV",
-      tagline: "Fast symptom relief",
-      description: "Immune-boosting vitamins and hydration to combat cold and flu symptoms quickly.",
-      benefits: ["Relieves symptoms fast", "Boosts immunity", "Reduces recovery time", "Rehydrates body"],
-      price: "1200",
-      priceOriginal: "1400",
-      priceDiscounted: "1200",
-      duration: "45-60 min",
-      image: "/images/task-01k9syx5bjf75vjp5njfvrrpj4-1762881701-img-0.webp",
-    },
-  ]
+  const ivDrips = ivDripsData.map((drip) => ({
+    name: drip.name,
+    slug: drip.slug,
+    tagline: drip.tagline,
+    description: drip.description,
+    benefits: drip.benefits,
+    price: drip.price,
+    duration: drip.duration,
+    image: drip.image,
+  }))
 
   const reviews = [
     {
       text: "They provided home vaccination service to my child, frankly their service is excellent",
       author: "khaled ali",
+      date: "2 months ago",
     },
     {
       text: "it was a great experience and wonderful serves",
       author: "omer alrasheed",
+      date: "3 months ago",
     },
     {
       text: "Speed, ease of delivery and punctuality",
       author: "abo-yazeed",
+      date: "1 month ago",
     },
     {
       text: "Very excellent service, speed of communication and achievement, and distinguished medical staff, thank you",
       author: "ahmed owaidan",
+      date: "2 weeks ago",
     },
     {
       text: "Excellent but they lack vital data for the child",
       author: "nada al-amry",
+      date: "4 months ago",
     },
     {
       text: "It was a good experience with you.",
       author: "Nora Bin Fahad",
+      date: "1 month ago",
     },
   ]
 
@@ -361,11 +203,6 @@ export default function HomePage() {
       name: "E-Pharmacy",
       slug: "e-pharmacy",
       description: "Order meds online with fast delivery and 24/7 pharmacist consultation.",
-    },
-    {
-      name: "Dental Clinic",
-      slug: "dental-clinic",
-      description: "Complete dental care from checkups to advanced treatments with modern equipment.",
     },
     {
       name: "Home Care Department - Jeddah",
@@ -420,7 +257,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
       <header className="fixed top-0 w-full z-50 bg-background/95 backdrop-blur-xl border-b border-border/50">
         <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
@@ -447,28 +284,15 @@ export default function HomePage() {
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                     {allServices.map((service) => (
                       <DropdownMenuItem key={service.name} asChild>
-                        <a
-                          href={`#service-${service.name.toLowerCase().replace(/\s+/g, "-")}`}
+                        <Link
+                          href={`/categories/${service.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")
+                            .replace(/[^a-z0-9-]/g, "")}`}
                           className="cursor-pointer block py-2 px-3 rounded-md hover:bg-accent"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            const servicesSection = document.getElementById("services")
-                            if (servicesSection) {
-                              servicesSection.scrollIntoView({ behavior: "smooth", block: "start" })
-                            }
-                            setTimeout(() => {
-                              const hash = `service-${service.name.toLowerCase().replace(/\s+/g, "-")}`
-                              try {
-                                window.history.pushState(null, "", `#${hash}`)
-                                window.dispatchEvent(new HashChangeEvent("hashchange"))
-                              } catch (error) {
-                                console.error("[v0] Error setting hash:", error)
-                              }
-                            }, 500)
-                          }}
                         >
                           <div className="font-medium text-sm">{service.name}</div>
-                        </a>
+                        </Link>
                       </DropdownMenuItem>
                     ))}
                   </div>
@@ -478,38 +302,22 @@ export default function HomePage() {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
-                {language === "ar" ? "المحاليل الوريدية" : "IV Drips"} <ChevronDown className="h-4 w-4" />
+                IV Drips <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-[700px] p-6">
+              <DropdownMenuContent align="start" className="w-[700px] p-6 max-h-[500px] overflow-y-auto">
                 <div>
                   <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                    {language === "ar" ? "المحاليل الوريدية" : "IV Drips"}
+                    IV Drips
                   </h3>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                    {ivDrips.map((drip) => (
-                      <DropdownMenuItem key={drip.name} asChild>
-                        <a
-                          href={`#iv-drip-${drip.name.toLowerCase().replace(/\s+/g, "-")}`}
+                    {ivDripsData.map((drip) => (
+                      <DropdownMenuItem key={drip.slug} asChild>
+                        <Link
+                          href={`/iv-drips/${drip.slug}`}
                           className="cursor-pointer block py-2 px-3 rounded-md hover:bg-accent"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            const ivDripsSection = document.getElementById("iv-drips")
-                            if (ivDripsSection) {
-                              ivDripsSection.scrollIntoView({ behavior: "smooth", block: "start" })
-                            }
-                            setTimeout(() => {
-                              const hash = `iv-drip-${drip.name.toLowerCase().replace(/\s+/g, "-")}`
-                              try {
-                                window.history.pushState(null, "", `#${hash}`)
-                                window.dispatchEvent(new HashChangeEvent("hashchange"))
-                              } catch (error) {
-                                console.error("[v0] Error setting hash:", error)
-                              }
-                            }, 500)
-                          }}
                         >
-                          <div className="font-medium text-sm">{language === "ar" ? drip.nameAr : drip.name}</div>
-                        </a>
+                          <div className="font-medium text-sm">{drip.name}</div>
+                        </Link>
                       </DropdownMenuItem>
                     ))}
                   </div>
@@ -528,7 +336,107 @@ export default function HomePage() {
             </a>
           </div>
           <div className="flex items-center gap-2">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[320px] p-0 overflow-y-auto">
+                <div className="flex flex-col h-full">
+                  {/* Mobile Menu Header */}
+                  <div className="p-6 border-b">
+                    <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                      <Image
+                        src="/images/logo-removebg-preview-201.png"
+                        alt="5CARE Network"
+                        width={140}
+                        height={50}
+                        className="w-auto h-[45px]"
+                      />
+                    </Link>
+                  </div>
+
+                  {/* Mobile Menu Navigation */}
+                  <nav className="flex-1 p-4">
+                    {/* Services Accordion */}
+                    <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
+                      <CollapsibleTrigger className="flex items-center justify-between w-full py-3 text-base font-medium text-foreground hover:text-primary transition-colors">
+                        {t("nav.services")}
+                        <ChevronDown className={`h-5 w-5 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="pl-4 pb-2 max-h-[300px] overflow-y-auto">
+                        <div className="flex flex-col gap-1">
+                          {allServices.map((service) => (
+                            <Link
+                              key={service.name}
+                              href={`/categories/${service.name
+                                .toLowerCase()
+                                .replace(/\s+/g, "-")
+                                .replace(/[^a-z0-9-]/g, "")}`}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                            >
+                              {service.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* IV Drips Accordion */}
+                    <Collapsible open={ivDripsOpen} onOpenChange={setIvDripsOpen}>
+                      <CollapsibleTrigger className="flex items-center justify-between w-full py-3 text-base font-medium text-foreground hover:text-primary transition-colors">
+                        IV Drips
+                        <ChevronDown className={`h-5 w-5 transition-transform ${ivDripsOpen ? "rotate-180" : ""}`} />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="pl-4 pb-2 max-h-[300px] overflow-y-auto">
+                        <div className="flex flex-col gap-1">
+                          {ivDripsData.map((drip) => (
+                            <Link
+                              key={drip.slug}
+                              href={`/iv-drips/${drip.slug}`}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+                            >
+                              {drip.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* Direct Links */}
+                    <a
+                      href="#how-it-works"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center py-3 text-base font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      {t("nav.howItWorks")}
+                    </a>
+                    <a
+                      href="#why-5cn"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center py-3 text-base font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      {t("nav.why5cn")}
+                    </a>
+                  </nav>
+
+                  {/* Mobile Menu Footer with CTA */}
+                  <div className="p-6 border-t mt-auto">
+                    <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                      <a href="https://wa.me/966115127600" target="_blank" rel="noopener noreferrer">
+                        {t("nav.bookNow")}
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+
+            <Button className="hidden md:flex bg-primary text-primary-foreground hover:bg-primary/90" asChild>
               <a href="https://wa.me/966115127600" target="_blank" rel="noopener noreferrer">
                 {t("nav.bookNow")}
               </a>
@@ -638,8 +546,8 @@ export default function HomePage() {
                 bgColor: "#ffffff",
               },
               {
-                name: "Allianz",
-                logo: "/images/e2d09e5c-6feb-4dd8-bf11-1b6d1e7f8cc6-removebg-preview.png",
+                name: "Al Rajhi Takaful",
+                logo: "/images/al.png",
                 bgColor: "#ffffff",
               },
             ]}
@@ -927,7 +835,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
 
       {/* Customer Reviews Section */}
       <section className="py-32 px-6 bg-muted/30">

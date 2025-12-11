@@ -1,11 +1,12 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 interface Review {
   text: string
   author: string
+  date: string
 }
 
 interface ReviewsSliderProps {
@@ -16,25 +17,31 @@ export default function ReviewsSlider({ reviews }: ReviewsSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
+  const [reviewsPerView, setReviewsPerView] = useState(3)
 
-  // Number of reviews to show at once based on screen size
-  const reviewsPerView = 3
-
-  const maxIndex = Math.max(0, reviews.length - reviewsPerView)
-
-  const getProfilePhoto = (name: string, index: number): string => {
-    // Map each reviewer to their specific photo
-    const reviewerPhotos: { [key: string]: string } = {
-      "khaled ali": "/reviews/khaled-ali.jpg",
-      "omer alrasheed": "/reviews/omer-alrasheed.jpg",
-      "abo-yazeed": "/reviews/abo-yazeed.jpg",
-      "ahmed owaidan": "/reviews/ahmed-owaidan.jpg",
-      "nada al-amry": "/reviews/nada-al-amry.jpg",
-      "nora bin fahad": "/reviews/nora-bin-fahad.jpg",
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setReviewsPerView(1)
+      } else {
+        setReviewsPerView(3)
+      }
     }
 
-    return reviewerPhotos[name.toLowerCase()] || "/placeholder.svg?height=32&width=32"
-  }
+    handleResize()
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    const newMaxIndex = Math.max(0, reviews.length - reviewsPerView)
+    if (currentIndex > newMaxIndex) {
+      setCurrentIndex(newMaxIndex)
+    }
+  }, [reviewsPerView, reviews.length, currentIndex])
+
+  const maxIndex = Math.max(0, reviews.length - reviewsPerView)
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
@@ -67,24 +74,29 @@ export default function ReviewsSlider({ reviews }: ReviewsSliderProps) {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 z-10 bg-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={currentIndex === 0}
         aria-label="Previous reviews"
       >
-        <span className="material-symbols-outlined leading-none block">chevron_left</span>
+        <span className="material-symbols-outlined leading-none block text-xl md:text-2xl">chevron_left</span>
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 z-10 bg-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center shadow-lg hover:bg-primary hover:text-primary-foreground transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={currentIndex >= maxIndex}
         aria-label="Next reviews"
       >
-        <span className="material-symbols-outlined leading-none block">chevron_right</span>
+        <span className="material-symbols-outlined leading-none block text-xl md:text-2xl">chevron_right</span>
       </button>
 
       {/* Slider Container */}
-      <div className="py-4" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      <div
+        className="overflow-hidden py-4 mx-6 md:mx-0"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div>
           <div
             className="flex transition-transform duration-500 ease-out"
@@ -93,8 +105,8 @@ export default function ReviewsSlider({ reviews }: ReviewsSliderProps) {
             }}
           >
             {reviews.map((review, index) => (
-              <div key={index} className="min-w-full md:min-w-[33.333%] px-4">
-                <div className="bg-white rounded-2xl p-8 shadow-lg h-full flex flex-col">
+              <div key={index} className="px-2 md:px-4 flex-shrink-0" style={{ width: `${100 / reviewsPerView}%` }}>
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg h-full flex flex-col">
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, i) => (
@@ -109,15 +121,11 @@ export default function ReviewsSlider({ reviews }: ReviewsSliderProps) {
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-lg text-foreground mb-6 flex-grow leading-relaxed">"{review.text}"</p>
+                  <p className="text-base md:text-lg text-foreground mb-6 flex-grow leading-relaxed">"{review.text}"</p>
 
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={getProfilePhoto(review.author, index) || "/placeholder.svg?height=32&width=32"}
-                      alt={`${review.author} profile`}
-                      className="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20"
-                    />
+                  <div className="flex items-center justify-between">
                     <div className="font-semibold text-primary capitalize">{review.author}</div>
+                    <div className="text-sm text-muted-foreground">{review.date}</div>
                   </div>
                 </div>
               </div>
@@ -127,13 +135,13 @@ export default function ReviewsSlider({ reviews }: ReviewsSliderProps) {
       </div>
 
       {/* Progress Dots */}
-      <div className="flex justify-center gap-2 mt-8">
+      <div className="flex justify-center gap-2 mt-6 md:mt-8 flex-wrap max-w-xs mx-auto">
         {Array.from({ length: maxIndex + 1 }).map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`h-2 rounded-full transition-all ${
-              currentIndex === index ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"
+              currentIndex === index ? "w-6 md:w-8 bg-primary" : "w-2 bg-muted-foreground/30"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

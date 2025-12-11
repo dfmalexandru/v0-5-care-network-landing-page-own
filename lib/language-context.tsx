@@ -55,11 +55,11 @@ const translations: Record<string, string> = {
   "services.filterAll": "All Services",
 
   // IV Drips Section
-  "ivdrips.badge": "13 IV Treatments",
-  "ivdrips.title1": "IV therapy tailored",
+  "ivdrips.badge": "32 IV Drips Treatments",
+  "ivdrips.title1": "IV Drips therapy tailored",
   "ivdrips.title2": "to your needs",
   "ivdrips.description":
-    "Medical-grade IV drips for energy, beauty, immunity, and recovery. Done by licensed professionals.",
+    "Medical-grade IV Drips for energy, beauty, immunity, and recovery. Done by licensed professionals.",
   "ivdrips.filterAll": "All Drips",
   "ivdrips.filterWellness": "Wellness",
   "ivdrips.filterBeauty": "Beauty",
