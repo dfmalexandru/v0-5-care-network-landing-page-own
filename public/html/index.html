@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="facebook-domain-verification" content="abcdef123456">
+  <title>5CARE Network - Healthcare, Delivered</title>
+  <meta name="description" content="Licensed medical care at home. Pick your service, book your time, and we will be there.">
+  <link rel="icon" href="/images/logo-removebg-preview.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #fafafa; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .header { position: sticky; top: 0; z-index: 50; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #27272a; }
+    .header-content { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .logo { height: 56px; width: auto; }
+    .nav { display: flex; gap: 32px; align-items: center; }
+    .nav a { color: #a1a1aa; transition: color 0.2s; }
+    .nav a:hover { color: #fafafa; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 500; transition: all 0.2s; }
+    .btn-primary { background: #22c55e; color: #0a0a0a; }
+    .btn-primary:hover { background: #16a34a; }
+    .btn-outline { border: 1px solid #27272a; background: rgba(10,10,10,0.8); }
+    .btn-outline:hover { background: #27272a; }
+    .hero { position: relative; padding: 96px 24px 128px; text-align: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.7), rgba(10,10,10,0.5), #0a0a0a); z-index: 1; }
+    .hero-bg video { width: 100%; height: 100%; object-fit: cover; }
+    .hero-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+    .badge { display: inline-block; padding: 8px 24px; border: 1px solid rgba(34,197,94,0.3); border-radius: 9999px; font-size: 14px; background: rgba(10,10,10,0.8); margin-bottom: 32px; }
+    .hero h1 { font-size: clamp(48px, 8vw, 96px); font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
+    .hero h1 span { color: #22c55e; }
+    .hero p { font-size: 20px; color: #a1a1aa; max-width: 600px; margin: 0 auto 32px; }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .trust-item { background: rgba(10,10,10,0.8); border: 1px solid rgba(39,39,42,0.5); border-radius: 16px; padding: 24px; text-align: center; }
+    .trust-item .number { font-size: 30px; font-weight: 700; color: #22c55e; }
+    .trust-item .label { font-size: 14px; color: #a1a1aa; }
+    .section { padding: 96px 24px; }
+    .section-title { font-size: clamp(36px, 5vw, 60px); font-weight: 700; text-align: center; margin-bottom: 16px; }
+    .section-desc { font-size: 20px; color: #a1a1aa; text-align: center; max-width: 600px; margin: 0 auto 48px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .service-card { background: #18181b; border: 1px solid #27272a; border-radius: 16px; padding: 24px; transition: all 0.3s; }
+    .service-card:hover { border-color: #22c55e; transform: translateY(-4px); }
+    .service-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; }
+    .service-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .service-card p { color: #a1a1aa; font-size: 14px; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .why-card { background: linear-gradient(135deg, #18181b, #0a0a0a); border: 1px solid #27272a; border-radius: 24px; padding: 32px; }
+    .why-card .icon { width: 48px; height: 48px; background: rgba(34,197,94,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .why-card .icon .material-symbols-outlined { color: #22c55e; font-size: 24px; }
+    .why-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+    .why-card p { color: #a1a1aa; }
+    .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .step { text-align: center; }
+    .step .number { width: 64px; height: 64px; background: linear-gradient(135deg, #22c55e, #16a34a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 16px; }
+    .step h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .step p { color: #a1a1aa; }
+    .testimonial { background: rgba(39,39,42,0.3); }
+    .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .testimonial-image { aspect-ratio: 1; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+    .testimonial-image img { width: 100%; height: 100%; object-fit: cover; }
+    .testimonial-content .stars { display: flex; gap: 4px; margin-bottom: 24px; }
+    .testimonial-content .stars .material-symbols-outlined { color: #22c55e; font-variation-settings: 'FILL' 1; }
+    .testimonial-content blockquote { font-size: 32px; font-weight: 500; line-height: 1.4; margin-bottom: 24px; }
+    .testimonial-content .author { font-weight: 600; font-size: 20px; }
+    .testimonial-content .role { color: #a1a1aa; }
+    .cta { text-align: center; background: linear-gradient(135deg, rgba(34,197,94,0.1), transparent); }
+    .cta h2 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+    .cta p { color: #a1a1aa; font-size: 20px; margin-bottom: 32px; }
+    .footer { background: #0a0a0a; border-top: 1px solid #27272a; padding: 64px 24px 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand img { height: 56px; margin-bottom: 16px; }
+    .footer-brand p { color: #a1a1aa; font-size: 14px; max-width: 300px; }
+    .footer-links h4 { font-weight: 600; margin-bottom: 16px; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { color: #a1a1aa; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: #22c55e; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid #27272a; }
+    .footer-bottom p { color: #71717a; font-size: 14px; }
+    .social-links { display: flex; gap: 16px; }
+    .social-links a { color: #a1a1aa; transition: color 0.2s; }
+    .social-links a:hover { color: #22c55e; }
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid, .how-steps, .testimonial-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <a href="/"><img src="/images/logo-removebg-preview.png" alt="5CARE Network" class="logo"></a>
+      <nav class="nav">
+        <a href="#services">Services</a>
+        <a href="#why">Why Us</a>
+        <a href="#how">How It Works</a>
+        <a href="https://wa.me/966115127600" target="_blank" class="btn btn-primary">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <video autoplay loop muted playsinline>
+        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ecca1ce8-f022-44b4-99ca-53b8bad2b9f9-5ocY18eiO5eYuvOneuJoC0V97cPjFP.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-content">
+      <div class="badge">Licensed by Ministry of Health - License 1410101201200633</div>
+      <h1>Healthcare,<br><span>delivered.</span></h1>
+      <p>Licensed medical care at home. Pick your service, book your time, and we will be there.</p>
+      <div class="hero-buttons">
+        <a href="https://wa.me/966115127600" target="_blank" class="btn btn-primary">Book Now</a>
+        <a href="#services" class="btn btn-outline">Explore Services</a>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="number">10+</div>
+          <div class="label">Years in Service</div>
+        </div>
+        <div class="trust-item">
+          <div class="number">10+</div>
+          <div class="label">Medical Services</div>
+        </div>
+        <div class="trust-item">
+          <div class="number">100%</div>
+          <div class="label">Licensed Pros</div>
+        </div>
+        <div class="trust-item">
+          <div class="number">24/7</div>
+          <div class="label">Always Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">Everything you need<br>to stay healthy</h2>
+      <p class="section-desc">Home visits, lab tests, dental care, and more. Medical care without the hassle.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="/saudi-family-home-care-nurse-patient-visit-modern.jpg" alt="Home Care">
+          <h3>Home Care</h3>
+          <p>Professional medical care in the comfort of your home</p>
+        </div>
+        <div class="service-card">
+          <img src="/saudi-nurse-baby-vaccination-home-pediatric-care.jpg" alt="Baby Vaccine">
+          <h3>Baby Vaccine</h3>
+          <p>Safe vaccination services for your little ones</p>
+        </div>
+        <div class="service-card">
+          <img src="/saudi-medical-team-office-corporate-health-screening.jpg" alt="Office Medical Care">
+          <h3>Office Medical Care</h3>
+          <p>Corporate health services for your workplace</p>
+        </div>
+        <div class="service-card">
+          <img src="/saudi-lab-technician-blood-test-home-collection.jpg" alt="Lab & Tests">
+          <h3>Lab & Tests</h3>
+          <p>Comprehensive laboratory testing at home</p>
+        </div>
+        <div class="service-card">
+          <img src="/iv-drip-therapy-home-infusion-wellness-treatment.jpg" alt="IV Drips">
+          <h3>IV Drips</h3>
+          <p>Revitalizing IV therapy treatments</p>
+        </div>
+        <div class="service-card">
+          <img src="/saudi-physiotherapist-home-rehabilitation-session.jpg" alt="Physiotherapy">
+          <h3>Physiotherapy</h3>
+          <p>Physical therapy and rehabilitation services</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why" class="section" style="background: rgba(39,39,42,0.2);">
+    <div class="container">
+      <h2 class="section-title">Top-tier care,<br>five-star service</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="icon"><span class="material-symbols-outlined">verified_user</span></div>
+          <h3>Licensed Medical Team</h3>
+          <p>Every healthcare provider is certified and licensed. We do not compromise on safety.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon"><span class="material-symbols-outlined">medical_services</span></div>
+          <h3>Full-Service Care</h3>
+          <p>Testing, treatment, follow-ups - we have got you covered with pro equipment.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon"><span class="material-symbols-outlined">schedule</span></div>
+          <h3>Easy & Convenient</h3>
+          <p>Book in minutes, pick your slot, and get white-glove service from start to finish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how" class="section">
+    <div class="container">
+      <h2 class="section-title">Get care in three steps</h2>
+      <div class="how-steps">
+        <div class="step">
+          <div class="number">1</div>
+          <h3>Pick Your Service</h3>
+          <p>Choose from home care, lab tests, IV therapy, and more.</p>
+        </div>
+        <div class="step">
+          <div class="number">2</div>
+          <h3>Book Your Time</h3>
+          <p>Select your date and location. We handle everything else.</p>
+        </div>
+        <div class="step">
+          <div class="number">3</div>
+          <h3>Get Expert Care</h3>
+          <p>Our licensed team shows up on time and takes care of you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="section testimonial">
+    <div class="container">
+      <div class="testimonial-grid">
+        <div class="testimonial-image">
+          <img src="/images/homepage-final-535x535-qrwxs0fbol1p82nsry5kbnvwvzo8ezok6cg8ir9qfk.jpg" alt="Client">
+        </div>
+        <div class="testimonial-content">
+          <div class="stars">
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+          </div>
+          <blockquote>"Been with 5CARE since 2013. The care is top-notch, and having pros come to your home changes everything."</blockquote>
+          <div class="author">Fatima Al-Qahtani</div>
+          <div class="role">Client Since 2013</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta">
+    <div class="container">
+      <h2>Ready for better care?</h2>
+      <p>Join thousands of Riyadh families who trust us with their health. Book today.</p>
+      <a href="https://wa.me/966115127600" target="_blank" class="btn btn-primary" style="font-size: 18px; padding: 16px 32px;">Schedule Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/images/logo-removebg-preview.png" alt="5CARE Network">
+          <p>A Saudi company specialized in medical services since 2013. Professional healthcare for families across Saudi Arabia.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/html/shipping.html">Shipping & Payment</a></li>
+            <li><a href="/html/blog.html">Blog</a></li>
+            <li><a href="/html/faq.html">FAQs</a></li>
+            <li><a href="/html/terms.html">Terms & Conditions</a></li>
+            <li><a href="/html/refund.html">Refunds</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/html/location.html">Location</a></li>
+            <li><a href="/html/about.html">About</a></li>
+            <li><a href="/html/privacy.html">Privacy</a></li>
+            <li><a href="https://wa.me/966115127600">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:customer.service@5cn-sa.com">customer.service@5cn-sa.com</a></li>
+            <li><a href="tel:+966920035182">+966 920 035 182</a></li>
+            <li><a href="https://wa.me/966115127600">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2025 5CARE Network. All rights reserved. Tax ID: 300018444200003</p>
+        <div class="social-links">
+          <a href="https://x.com/5aborcare" target="_blank"><span class="material-symbols-outlined">tag</span></a>
+          <a href="https://www.instagram.com/5aborcare" target="_blank"><span class="material-symbols-outlined">photo_camera</span></a>
+          <a href="https://www.facebook.com/5aborcare" target="_blank"><span class="material-symbols-outlined">group</span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
