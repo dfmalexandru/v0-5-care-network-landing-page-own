@@ -133,16 +133,13 @@ export default function IVDripPageClient({ drip }: IVDripPageClientProps) {
           <h2 className="text-3xl font-bold mb-12 text-center">How It Works</h2>
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: "calendar_month", title: "Book", description: "Schedule your appointment via WhatsApp" },
-              { icon: "home", title: "We Come to You", description: "Our medical team arrives at your location" },
-              { icon: "medical_services", title: "Treatment", description: "Relax while receiving your IV therapy" },
-              { icon: "favorite", title: "Feel Better", description: "Experience the benefits within hours" },
+              { title: "Book", description: "Schedule your appointment via WhatsApp" },
+              { title: "We Come to You", description: "Our medical team arrives at your location" },
+              { title: "Treatment", description: "Relax while receiving your IV therapy" },
+              { title: "Feel Better", description: "Experience the benefits within hours" },
             ].map((step, index) => (
               <div key={index} className="text-center space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary text-3xl">{step.icon}</span>
-                </div>
-                <div className="w-8 h-8 mx-auto rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                <div className="w-12 h-12 mx-auto rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl">
                   {index + 1}
                 </div>
                 <h3 className="font-semibold text-lg">{step.title}</h3>
