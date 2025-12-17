@@ -59,6 +59,7 @@ export default function IVDripPageClient({ drip }: IVDripPageClientProps) {
                   <div>
                     <p className="text-xs text-muted-foreground">Price</p>
                     <p className="text-lg font-bold">{drip.price} SAR</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">Home visit included</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-muted">
@@ -160,7 +161,11 @@ export default function IVDripPageClient({ drip }: IVDripPageClientProps) {
                 Book your {drip.name} today and experience the benefits of professional IV therapy in the comfort of
                 your home.
               </p>
-              <div className="text-2xl font-bold">{drip.price} SAR</div>
+              <div className="space-y-1">
+                <div className="text-2xl font-bold">{drip.price} SAR</div>
+                <div className="text-sm text-primary-foreground/80">Home visit included</div>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button size="lg" variant="secondary" className="gap-2" asChild>
                   <a href="https://wa.me/966115127600" target="_blank" rel="noopener noreferrer">

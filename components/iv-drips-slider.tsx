@@ -206,6 +206,9 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
                         <div className="absolute bottom-4 right-4 bg-primary text-primary-foreground rounded-xl p-4 shadow-2xl">
                           <div className="text-2xl font-bold">{drip.price}</div>
                           <div className="text-xs opacity-90">SAR</div>
+                          <div className="text-xs opacity-90 mt-1 pt-1 border-t border-primary-foreground/20">
+                            Home visit included
+                          </div>
                         </div>
                       </div>
 
