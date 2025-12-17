@@ -3,7 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated color scheme to match 5CARE Network branding with light blue primary */
 :root {
   --background: oklch(0.99 0 0);
   --foreground: oklch(0.15 0.01 240);
@@ -76,8 +75,9 @@
 }
 
 @theme inline {
-  --font-sans: "Comfortaa", "Comfortaa Fallback";
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --font-sans: "Comfortaa", "Comfortaa Fallback", sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -122,36 +122,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Prevent horizontal scroll on mobile */
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* Enable smooth scrolling for anchor links */
-  html {
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer and Edge */
-    /* Prevent horizontal scroll at root level */
-    overflow-x: hidden;
-    width: 100%;
-  }
-
-  html::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
-  }
-
-  /* Add RTL support for Arabic */
-  [dir="rtl"] {
-    direction: rtl;
-  }
-
-  [dir="rtl"] .rtl\:rotate-180 {
-    transform: rotate(180deg);
   }
 }
 
-/* Adding smooth video crossfade animation for hero background */
 @keyframes fadeInOut {
   0% {
     opacity: 1;

@@ -19,6 +19,7 @@ interface IVDrip {
   price: string
   duration: string
   image: string
+  targetAudience: string // Added targetAudience to interface
 }
 
 interface IVDripsSliderProps {
@@ -95,6 +96,46 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
     if (!containerRef.current) return
     const cardWidth = containerRef.current.scrollWidth / drips.length
     containerRef.current.scrollBy({ left: cardWidth, behavior: "smooth" })
+  }
+
+  const getTargetAudience = (slug: string): string => {
+    const audiences: Record<string, string> = {
+      "weight-loss-metabolic-burn-drip":
+        "Adults on supervised weight‑loss plans; low‑energy individuals; metabolic support clients.",
+      "energy-boost-performance-drip": "Busy professionals, shift workers, students, recreational athletes.",
+      "skin-freshness-glow-drip": "Clients wanting glowing skin; travelers; individuals exposed to sun/pollution.",
+      "bariatric-surgery-drip": "Post‑bariatric patients under clinical follow‑up.",
+      "diabetic-support-drip": "Adults with diabetes or insulin resistance under medical supervision.",
+      "sexual-performance-vitality-drip": "Adult men with performance decline; couples optimizing fertility.",
+      "chronic-fatigue-drip": "Individuals with persistent fatigue under medical evaluation.",
+      "diet-detox-drip": "Clients on detox programs or exposed to lifestyle toxins.",
+      "fertility-repro-boost-drip": "Men and women preparing for pregnancy; fertility optimization clients.",
+      "athletic-recovery-drip": "Athletes, gym‑goers, labor‑intensive workers.",
+      "hair-growth-drip": "Clients with hair thinning due to stress, postpartum, or nutrient deficiencies.",
+      "depression-support-drip": "Adults with low mood or burnout (adjunct support only).",
+      "motherhood-postnatal-drip": "Postpartum women needing nutritional replenishment.",
+      "immune-defense-drip": "People prone to frequent infections or high stress.",
+      "jet-lag-reset-drip": "Frequent travelers, flight crews, business professionals.",
+      "anti-aging-renewal-drip": "Adults seeking longevity, collagen support, and vitality.",
+      "anti-stress-adrenal-drip": "High‑pressure professionals, caregivers, students.",
+      "cold-flu-immune-rescue-drip": "Clients recovering from flu, frequent travelers, exposed workers.",
+      "migraine-neuro-calm-drip": "Adults with migraines under neurologist care.",
+      "dementia-cognitive-support-drip": "Older adults with memory concerns; cognitive support patients.",
+      "hangover-recovery-drip": "Adults with dehydration or nausea after alcohol intake.",
+      "hydration-drip": "Athletes, dehydrated individuals, travelers.",
+      "post-surgery-healing-drip": "Post‑operative patients seeking recovery support.",
+      "pre-surgery-optimization-drip": "Patients preparing for elective surgery.",
+      "royal-flush-mini": "Partygoers, travelers, busy individuals needing fast recovery.",
+      "myers-cocktail": "Clients with chronic fatigue, stress, immune weakness.",
+      "vitamin-d-drip": "Individuals with low vitamin D levels or malabsorption.",
+      "super-b-complex-drip": "Vegans, fatigued clients, those with low B‑vitamin intake.",
+      "vitamin-c-zinc-drip": "Clients wanting immune support during illness.",
+      "vitamin-c-drip": "Individuals needing antioxidant or collagen support.",
+      "zinc-drip": "Clients with low zinc, skin issues, or immune weakness.",
+      "b12-drip": "Vegans, older adults, individuals with B12 deficiency.",
+    }
+
+    return audiences[slug] || "Consult with our medical team to see if this treatment is right for you."
   }
 
   return (
@@ -178,6 +219,17 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
                           <p className="text-sm text-primary font-medium mb-2">{drip.tagline}</p>
                           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
                             {drip.description}
+                          </p>
+                        </div>
+
+                        {/* Target Audience Section */}
+                        <div className="bg-primary/5 rounded-lg p-4 space-y-2 border border-primary/10">
+                          <h4 className="font-semibold text-sm flex items-center gap-2 text-primary">
+                            <span className="material-symbols-outlined text-lg">group</span>
+                            Ideal For:
+                          </h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {getTargetAudience(drip.slug)}
                           </p>
                         </div>
 

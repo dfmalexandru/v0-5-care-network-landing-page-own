@@ -25,7 +25,7 @@ export const ivDripsData: IVDrip[] = [
     price: "1550",
     duration: "60-75 min",
     image: "/images/iv-treatments/weight-loss-metabolic-burn.jpg",
-    targetAudience: "Adults on supervised weight-loss plans; low-energy individuals; metabolic support clients.",
+    targetAudience: "Adults on supervised weight‑loss plans; low‑energy individuals; metabolic support clients.",
   },
   {
     name: "Energy Boost - Performance IV Drips",
@@ -61,7 +61,7 @@ export const ivDripsData: IVDrip[] = [
     price: "1400",
     duration: "45-60 min",
     image: "/images/iv-treatments/bariatric-surgery-support.jpg",
-    targetAudience: "Post-bariatric patients under clinical follow-up.",
+    targetAudience: "Post‑bariatric patients under clinical follow‑up.",
   },
   {
     name: "Diabetic Support IV Drips",
@@ -135,7 +135,7 @@ export const ivDripsData: IVDrip[] = [
     price: "1400",
     duration: "45-60 min",
     image: "/images/iv-treatments/athletic-recovery.jpg",
-    targetAudience: "Athletes, gym-goers, labor-intensive workers.",
+    targetAudience: "Athletes, gym‑goers, labor‑intensive workers.",
   },
   {
     name: "Hair Growth IV Drips",
@@ -213,7 +213,7 @@ export const ivDripsData: IVDrip[] = [
     price: "1300",
     duration: "45-60 min",
     image: "/images/iv-treatments/anti-stress-adrenal.jpg",
-    targetAudience: "High-pressure professionals, caregivers, students.",
+    targetAudience: "High‑pressure professionals, caregivers, students.",
   },
   {
     name: "Cold & Flu - Immune Rescue IV Drips",
@@ -283,7 +283,7 @@ export const ivDripsData: IVDrip[] = [
     price: "1200",
     duration: "45-60 min",
     image: "/images/iv-treatments/post-surgery-healing.jpg",
-    targetAudience: "Post-operative patients seeking recovery support.",
+    targetAudience: "Post‑operative patients seeking recovery support.",
   },
   {
     name: "Pre Surgery - Optimization IV Drips",
@@ -338,7 +338,7 @@ export const ivDripsData: IVDrip[] = [
     price: "1100",
     duration: "30-45 min",
     image: "/images/iv-treatments/super-b-complex.jpg",
-    targetAudience: "Vegans, fatigued clients, those with low B-vitamin intake.",
+    targetAudience: "Vegans, fatigued clients, those with low B‑vitamin intake.",
   },
   {
     name: "Vitamin C + Zinc IV Drips",
