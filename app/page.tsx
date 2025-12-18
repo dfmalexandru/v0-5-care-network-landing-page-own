@@ -18,6 +18,7 @@ import IVDripsSlider from "@/components/iv-drips-slider"
 import { ivDripsData } from "@/lib/iv-drips-data"
 import { useState } from "react"
 import { LanguageSelector } from "@/components/language-selector"
+import { CoverageMap } from "@/components/coverage-map"
 
 export default function HomePage() {
   const { language, t } = useLanguage()
@@ -206,11 +207,6 @@ export default function HomePage() {
       description: "Order meds online with fast delivery and 24/7 pharmacist consultation.",
     },
     {
-      name: "Home Care Department - Jeddah",
-      slug: "home-care-jeddah",
-      description: "Specialized home healthcare in Jeddah with local medical professionals.",
-    },
-    {
       name: "Insurance",
       slug: "insurance",
       description: "Medical insurance support. We work with major providers for seamless billing.",
@@ -231,11 +227,6 @@ export default function HomePage() {
       description: "On-site medical services for businesses. Clinics, screenings, and wellness programs.",
     },
     {
-      name: "Nursing Care - Jeddah",
-      slug: "nursing-care-jeddah",
-      description: "Pro nursing in Jeddah. Wound care, meds, IV therapy, and monitoring.",
-    },
-    {
       name: "Home Baby Vaccine",
       slug: "home-baby-vaccine",
       description: "Baby vaccines at home by pediatric nurses. Follow WHO schedules safely.",
@@ -249,11 +240,6 @@ export default function HomePage() {
       name: "Radiology",
       slug: "radiology",
       description: "Diagnostic imaging at home. X-rays, ultrasounds with portable equipment.",
-    },
-    {
-      name: "Special Offers",
-      slug: "special-offers",
-      description: "Healthcare packages at great value. Check for seasonal deals and bundles.",
     },
   ]
 
@@ -272,7 +258,7 @@ export default function HomePage() {
             />
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
                 {t("nav.services")} <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
@@ -285,15 +271,31 @@ export default function HomePage() {
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                     {allServices.map((service) => (
                       <DropdownMenuItem key={service.name} asChild>
-                        <Link
-                          href={`/categories/${service.name
+                        <a
+                          href={`#service-${service.name
                             .toLowerCase()
                             .replace(/\s+/g, "-")
                             .replace(/[^a-z0-9-]/g, "")}`}
                           className="cursor-pointer block py-2 px-3 rounded-md hover:bg-accent"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            const hash = `#service-${service.name
+                              .toLowerCase()
+                              .replace(/\s+/g, "-")
+                              .replace(/[^a-z0-9-]/g, "")}`
+                            // Scroll to services section first
+                            const servicesSection = document.getElementById("services")
+                            if (servicesSection) {
+                              servicesSection.scrollIntoView({ behavior: "smooth" })
+                            }
+                            // Then update hash to trigger slider scroll
+                            setTimeout(() => {
+                              window.location.hash = hash
+                            }, 500)
+                          }}
                         >
                           <div className="font-medium text-sm">{service.name}</div>
-                        </Link>
+                        </a>
                       </DropdownMenuItem>
                     ))}
                   </div>
@@ -301,7 +303,7 @@ export default function HomePage() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
               <DropdownMenuTrigger className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1">
                 IV Drips <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
@@ -313,12 +315,25 @@ export default function HomePage() {
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                     {ivDripsData.map((drip) => (
                       <DropdownMenuItem key={drip.slug} asChild>
-                        <Link
-                          href={`/iv-drips/${drip.slug}`}
+                        <a
+                          href={`#iv-drip-${drip.slug}`}
                           className="cursor-pointer block py-2 px-3 rounded-md hover:bg-accent"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            const hash = `#iv-drip-${drip.slug}`
+                            // Scroll to IV drips section first
+                            const ivDripsSection = document.getElementById("iv-drips")
+                            if (ivDripsSection) {
+                              ivDripsSection.scrollIntoView({ behavior: "smooth" })
+                            }
+                            // Then update hash to trigger slider scroll
+                            setTimeout(() => {
+                              window.location.hash = hash
+                            }, 500)
+                          }}
                         >
                           <div className="font-medium text-sm">{drip.name}</div>
-                        </Link>
+                        </a>
                       </DropdownMenuItem>
                     ))}
                   </div>
@@ -568,6 +583,21 @@ export default function HomePage() {
               {
                 name: "Al Rajhi Takaful",
                 logo: "/images/al.png",
+                bgColor: "#ffffff",
+              },
+              {
+                name: "Meena",
+                logo: "/images/partners/meena-logo.svg",
+                bgColor: "#ffffff",
+              },
+              {
+                name: "Medgulf",
+                logo: "/images/partners/medgulf-logo.png",
+                bgColor: "#ffffff",
+              },
+              {
+                name: "Walaa",
+                logo: "/images/partners/walaa-logo.png",
                 bgColor: "#ffffff",
               },
             ]}
@@ -876,6 +906,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Coverage Map Section */}
+      <CoverageMap />
+
       {/* CTA Section */}
       <section className="py-32 px-6 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 bg-cyan-600">
         <div className="container mx-auto max-w-4xl relative z-20">
@@ -912,7 +945,9 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">{t("footer.tagline")}</h4>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">{t("footer.description")}</p>
 
-              {/* Mobile Apps */}
+              {/* CHANGE: Hidden download app CTAs for now */}
+              {/* Mobile Apps - Hidden for now */}
+              {/*
               <div className="mb-6">
                 <h4 className="font-semibold mb-3">{t("footer.downloadApp")}</h4>
                 <div className="flex flex-col gap-2">
@@ -934,6 +969,7 @@ export default function HomePage() {
                   </a>
                 </div>
               </div>
+              */}
             </div>
 
             {/* Important Links - Column 1 */}

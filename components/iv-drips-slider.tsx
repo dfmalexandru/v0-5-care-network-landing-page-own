@@ -81,8 +81,18 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
   const handleFilterChange = (filter: string) => {
     setSelectedFilter(filter)
     if (containerRef.current) {
-      containerRef.current.scrollLeft = 0
-      setScrollPosition(0)
+      if (filter === "All") {
+        containerRef.current.scrollTo({ left: 0, behavior: "smooth" })
+        setScrollPosition(0)
+      } else {
+        // Find the index of the selected drip and scroll to it
+        const dripIndex = drips.findIndex((drip) => drip.name === filter)
+        if (dripIndex !== -1) {
+          const cardWidth = containerRef.current.scrollWidth / drips.length
+          containerRef.current.scrollTo({ left: cardWidth * dripIndex, behavior: "smooth" })
+          setScrollPosition(cardWidth * dripIndex)
+        }
+      }
     }
   }
 

@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ArrowRight, Check } from "lucide-react"
+import { ArrowRight, Check, Info } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 interface Treatment {
   name: string
+  slug?: string // Added optional slug field
   tagline: string
   description: string
   benefits: string[]
@@ -21,6 +23,28 @@ interface Treatment {
 
 interface TreatmentSliderProps {
   treatments: Treatment[]
+}
+
+const getServiceSlug = (name: string): string => {
+  const slugMap: Record<string, string> = {
+    "Home Care Department": "home-care",
+    "Home Laboratory Tests": "home-laboratory-tests",
+    "Home Baby Vaccines": "home-baby-vaccine",
+    "E-Pharmacy": "e-pharmacy",
+    "Urgent Care": "urgent-care",
+    "Medical Consultation - Video": "medical-consultation-video",
+    "Office Medical Care": "office-medical-care",
+    "Home Radiology": "radiology",
+    "Home Nursing Care": "home-nursing-care",
+    Insurance: "insurance",
+  }
+  return (
+    slugMap[name] ||
+    name
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+  )
 }
 
 export default function TreatmentSlider({ treatments }: TreatmentSliderProps) {
@@ -86,8 +110,17 @@ export default function TreatmentSlider({ treatments }: TreatmentSliderProps) {
   const handleFilterChange = (filter: string) => {
     setSelectedFilter(filter)
     if (containerRef.current) {
-      containerRef.current.scrollLeft = 0
-      setScrollPosition(0)
+      if (filter === "All") {
+        containerRef.current.scrollTo({ left: 0, behavior: "smooth" })
+        setScrollPosition(0)
+      } else {
+        const treatmentIndex = treatments.findIndex((t) => t.name === filter)
+        if (treatmentIndex !== -1) {
+          const cardWidth = containerRef.current.scrollWidth / treatments.length
+          containerRef.current.scrollTo({ left: cardWidth * treatmentIndex, behavior: "smooth" })
+          setScrollPosition(cardWidth * treatmentIndex)
+        }
+      }
     }
   }
 
@@ -206,16 +239,24 @@ export default function TreatmentSlider({ treatments }: TreatmentSliderProps) {
                         </div>
                       </div>
 
-                      <Button
-                        size="sm"
-                        className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
-                        asChild
-                      >
-                        <a href="https://wa.me/966115127600" target="_blank" rel="noopener noreferrer">
-                          Book Now
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
+                      <div className="flex flex-col gap-2">
+                        <Button size="sm" variant="outline" className="w-full bg-transparent" asChild>
+                          <Link href={`/services/${treatment.slug || getServiceSlug(treatment.name)}`}>
+                            View Details
+                            <Info className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+                          asChild
+                        >
+                          <a href="https://wa.me/966115127600" target="_blank" rel="noopener noreferrer">
+                            Book Now
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </a>
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
