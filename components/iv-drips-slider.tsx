@@ -151,7 +151,7 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
         <h3 className="text-lg font-semibold">Filter by treatment</h3>
         <div className="flex justify-center">
           <Select value={selectedFilter} onValueChange={handleFilterChange}>
-            <SelectTrigger className="w-full max-w-md">
+            <SelectTrigger className="w-full max-w-md bg-white">
               <SelectValue placeholder="All treatments" />
             </SelectTrigger>
             <SelectContent>
