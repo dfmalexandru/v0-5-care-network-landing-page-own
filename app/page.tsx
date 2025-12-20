@@ -353,6 +353,9 @@ export default function HomePage() {
             </a>
           </div>
           <div className="flex items-center gap-2">
+            <span className="hidden md:inline-flex items-center justify-center rounded-md bg-primary/10 text-primary text-xs font-bold px-2 py-1.5">
+              EN
+            </span>
             <LanguageSelector />
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
