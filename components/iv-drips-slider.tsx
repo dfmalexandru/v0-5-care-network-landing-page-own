@@ -188,7 +188,7 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
         {/* Slider Container */}
         <div
           ref={containerRef}
-          className="py-4 overflow-x-auto overflow-y-hidden scrollbar-hide"
+          className="py-4 overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-sky-50 rounded-2xl bg-white"
           style={{
             scrollSnapType: "none",
             WebkitOverflowScrolling: "touch",
@@ -199,7 +199,7 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
           onTouchEnd={handleTouchEnd}
           onScroll={handleScroll}
         >
-          <div className="flex gap-6 px-6">
+          <div className="flex gap-6 px-6 bg-white">
             {drips.map((drip, idx) => (
               <div key={idx} className="w-[85%] md:w-[calc(33.333%-16px)] flex-shrink-0">
                 <Link href={`/iv-drips/${drip.slug}`} className="block h-full">

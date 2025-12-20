@@ -622,9 +622,13 @@ export default function HomePage() {
       </section>
 
       {/* IV Drips Section */}
-      <section id="iv-drips" className="py-24 md:py-32 container mx-auto px-6 bg-muted/30">
+      <section id="iv-drips" className="py-24 md:py-32 container mx-auto px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <Badge variant="outline" className="mb-6 text-base px-4 py-2 border-none bg-sidebar-accent">
+          <Badge
+            variant="outline"
+            className="mb-6 text-base px-4 py-2 border-none font-bold"
+            style={{ backgroundColor: "#E4F4F8", color: "#13AACF" }}
+          >
             {t("ivdrips.badge")}
           </Badge>
           <h2 className="text-5xl md:text-6xl mb-6 text-balance font-bold">
