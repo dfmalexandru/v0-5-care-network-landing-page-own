@@ -16,6 +16,7 @@ import { ChevronDown, Menu } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import IVDripsSlider from "@/components/iv-drips-slider"
 import { ivDripsData } from "@/lib/iv-drips-data"
+import { servicesData } from "@/lib/services-data"
 import { useState } from "react"
 import { LanguageSelector } from "@/components/language-selector"
 import { CoverageMap } from "@/components/coverage-map"
@@ -386,13 +387,10 @@ export default function HomePage() {
                       </CollapsibleTrigger>
                       <CollapsibleContent className="pl-4 pb-2 max-h-[300px] overflow-y-auto">
                         <div className="flex flex-col gap-1">
-                          {allServices.map((service) => (
+                          {servicesData.map((service) => (
                             <Link
-                              key={service.name}
-                              href={`/categories/${service.name
-                                .toLowerCase()
-                                .replace(/\s+/g, "-")
-                                .replace(/[^a-z0-9-]/g, "")}`}
+                              key={service.slug}
+                              href={`/services/${service.slug}`}
                               onClick={() => setMobileMenuOpen(false)}
                               className="py-2 px-3 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
                             >
