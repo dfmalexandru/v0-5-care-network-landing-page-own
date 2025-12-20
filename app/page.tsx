@@ -631,7 +631,7 @@ export default function HomePage() {
           >
             {t("ivdrips.badge")}
           </Badge>
-          <h2 className="text-5xl md:text-6xl mb-6 text-balance font-bold">
+          <h2 className="text-5xl md:text-6xl mb-6 text-balance font-bold text-primary">
             {t("ivdrips.title1")}
             <br />
             {t("ivdrips.title2")}
