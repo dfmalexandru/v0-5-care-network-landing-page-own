@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -48,6 +49,7 @@ const getServiceSlug = (name: string): string => {
 }
 
 export default function TreatmentSlider({ treatments }: TreatmentSliderProps) {
+  const router = useRouter()
   const allTreatmentNames = treatments.map((t) => t.name)
 
   const [selectedFilter, setSelectedFilter] = useState<string>("All")
@@ -114,12 +116,8 @@ export default function TreatmentSlider({ treatments }: TreatmentSliderProps) {
         containerRef.current.scrollTo({ left: 0, behavior: "smooth" })
         setScrollPosition(0)
       } else {
-        const treatmentIndex = treatments.findIndex((t) => t.name === filter)
-        if (treatmentIndex !== -1) {
-          const cardWidth = containerRef.current.scrollWidth / treatments.length
-          containerRef.current.scrollTo({ left: cardWidth * treatmentIndex, behavior: "smooth" })
-          setScrollPosition(cardWidth * treatmentIndex)
-        }
+        const slug = getServiceSlug(filter)
+        router.push(`/services/${slug}`)
       }
     }
   }

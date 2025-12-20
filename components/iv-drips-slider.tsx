@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -28,6 +29,7 @@ interface IVDripsSliderProps {
 }
 
 export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
+  const router = useRouter()
   const [selectedFilter, setSelectedFilter] = useState<string>("All")
   const [scrollPosition, setScrollPosition] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -80,18 +82,13 @@ export default function IVDripsSlider({ drips }: IVDripsSliderProps) {
 
   const handleFilterChange = (filter: string) => {
     setSelectedFilter(filter)
-    if (containerRef.current) {
-      if (filter === "All") {
-        containerRef.current.scrollTo({ left: 0, behavior: "smooth" })
-        setScrollPosition(0)
-      } else {
-        // Find the index of the selected drip and scroll to it
-        const dripIndex = drips.findIndex((drip) => drip.name === filter)
-        if (dripIndex !== -1) {
-          const cardWidth = containerRef.current.scrollWidth / drips.length
-          containerRef.current.scrollTo({ left: cardWidth * dripIndex, behavior: "smooth" })
-          setScrollPosition(cardWidth * dripIndex)
-        }
+    if (filter === "All") {
+      containerRef.current?.scrollTo({ left: 0, behavior: "smooth" })
+      setScrollPosition(0)
+    } else {
+      const selectedDrip = drips.find((drip) => drip.name === filter)
+      if (selectedDrip) {
+        router.push(`/iv-drips/${selectedDrip.slug}`)
       }
     }
   }
