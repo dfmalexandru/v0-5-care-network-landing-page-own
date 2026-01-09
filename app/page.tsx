@@ -323,7 +323,7 @@ export default function HomePage() {
                             e.preventDefault()
                             const hash = `#iv-drip-${drip.slug}`
                             // Scroll to IV drips section first
-                            const ivDripsSection = document.getElementById("iv-drips")
+                            const ivDripsSection = document.getElementById("ivdrips")
                             if (ivDripsSection) {
                               ivDripsSection.scrollIntoView({ behavior: "smooth" })
                             }
@@ -622,7 +622,7 @@ export default function HomePage() {
       </section>
 
       {/* IV Drips Section */}
-      <section id="iv-drips" className="py-24 md:py-32 container mx-auto px-6 bg-sky-50">
+      <section id="ivdrips" className="py-24 md:py-32 container mx-auto px-6 bg-sky-50">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <Badge
             variant="outline"
