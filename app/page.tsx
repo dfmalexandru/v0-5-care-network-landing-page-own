@@ -357,6 +357,13 @@ export default function HomePage() {
               EN
             </span>
             <LanguageSelector />
+            {/* CHANGE: Updated Arabic tag to show on tablet/mobile only, hide on desktop */}
+            <a
+              href="https://ae.5cn.site/"
+              className="inline-flex lg:hidden items-center justify-center rounded-md bg-primary/10 text-primary text-xs font-bold px-2 py-1.5 hover:bg-primary/20 transition-colors"
+            >
+              العربية
+            </a>
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
